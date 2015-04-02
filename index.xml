@@ -1,0 +1,24 @@
+<craft>
+    <parameter name="type" type="string" default="none"/>
+    <script type="text/openjscad">
+        function main(params) {
+
+            var connectors = []; //for connector addtion
+            var holes = [];      //for connector hole
+
+            if (params.type != 'none') { //bottom
+				var block = params.type
+                
+
+            holes.forEach(function(h){
+                console.log("now subtracting side")
+                piece = difference(piece, h)
+                return piece;
+            })
+
+            return piece;
+        } // end of main
+        
+
+    </script>
+</craft>
