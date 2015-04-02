@@ -1,10 +1,15 @@
 <craft>
     <craft name="circuit" src="./index.xml"/>
     <row> 	 	
-	 	<circuit blocktype="straight"></circuit>
-	 	<circuit blocktype="tshape"></circuit>
+	 	<column>
+	 		<circuit blocktype="straight"></circuit>
+	 		<circuit blocktype="straight"></circuit>
+		</column>
+	 	<column>
+	 		<circuit blocktype="cross"></circuit>
+			<circuit blocktype="tshape"></circuit>
+		</column>
 	 	<circuit blocktype="sensor"></circuit>
-	 	<circuit blocktype="cross"></circuit>
 	 	<circuit blocktype="corner"></circuit>
 	 </row>
 	 
