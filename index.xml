@@ -1,22 +1,84 @@
 <craft>
-    <parameter name="type" type="string" default="none"/>
+    <parameter name="blocktype" type="string" default="none"/>
+    <parameter name="direction" type="string" default="none"/>
+
     <script type="text/openjscad">
         function main(params) {
 
-            var connectors = []; //for connector addtion
-            var holes = [];      //for connector hole
+            var base = cube([20,20,1])
+                //,connector = cylinder({r:2, h:2, fn:3})
+                ,connector = cylinder({r:2, h:2})
 
-            if (params.type != 'none') { //bottom
-				var block = params.type
-                
+            if (params.blocktype != 'none') { //bottom
+				var block = params.blocktype
 
-            holes.forEach(function(h){
-                console.log("now subtracting side")
-                piece = difference(piece, h)
-                return piece;
-            })
-
-            return piece;
+                if(block === "sensor"){
+                    var circuit = union(
+                            base
+                            ,cube([7,3,2]).translate([0,8,0])
+                            ,cube([7,3,2]).translate([13,8,0])
+                            ,connector.translate([20,9.5,0])
+                        )
+                    circuit = difference(
+                            circuit
+                            ,connector.translate([0,9.5,0])
+                        )
+                } else if(block === "straight"){
+                    var circuit = union(
+                            base
+                            ,cube([20,3,2]).translate([0,8,0])
+                            ,connector.translate([20,9.5,0])
+                        )
+                    circuit = difference(
+                            circuit
+                            ,connector.translate([0,9.5,0])
+                        )
+                } else if(block === "cross"){
+                    var circuit = union(
+                            base
+                            ,cube([20,3,2]).translate([0,9,0])
+                            ,cube([3,20,2]).translate([9,0,0])
+                            ,connector.translate([20,10.5,0]) //right
+                            ,connector.translate([10.5,20,0]) //top
+                        )
+                    circuit = difference(
+                            circuit
+                            ,connector.translate([0,10,0])
+                            ,connector.translate([10,0,0])
+                        )
+                } else if(block === "corner"){
+                    var circuit = union(
+                            base
+                            ,cube([10,3,2]).translate([0,9.5,0])
+                            ,cube([3,10,2]).translate([9.5,0,0])
+                            ,connector.translate([10,0,0])
+                        )
+                    circuit = difference(
+                            circuit
+                            ,connector.translate([0,9.5,0])
+                        )
+                } else if(block === "tshape"){
+                    var circuit = union(
+                            base
+                            ,cube([20,3,2]).translate([0,8,0])
+                            ,cube([3,10,2]).translate([8,0,0])
+                            ,connector.translate([20,9.5,0])
+                        )
+                    circuit = difference(
+                            circuit
+                            ,connector.translate([0,9.5,0])
+                            ,connector.translate([9.5,0,0])
+                        )
+                } else {
+        
+                    holes.forEach(function(h){
+                        console.log("now subtracting side")
+                        piece = difference(piece, h)
+                        return piece;
+                    })    
+                }
+            }
+            return circuit;
         } // end of main
         
 

@@ -1,0 +1,11 @@
+<craft>
+    <craft name="circuit" src="./index.xml"/>
+    <row> 	 	
+	 	<circuit blocktype="straight"></circuit>
+	 	<circuit blocktype="tshape"></circuit>
+	 	<circuit blocktype="sensor"></circuit>
+	 	<circuit blocktype="cross"></circuit>
+	 	<circuit blocktype="corner"></circuit>
+	 </row>
+	 
+</craft>
