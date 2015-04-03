@@ -11,10 +11,9 @@
 
             if (params.blocktype != 'none') { //bottom
 				var block = params.blocktype
+                var direction = params.direction
 
                 if(block === "sensor"){
-
-                    var direction = params.direction
                     if(direction === "top"){
                         var circuit = union(
                             base
@@ -39,8 +38,6 @@
                         )
                     }
                 } else if(block === "straight"){
-                    var direction = params.direction
-
                     if(direction === "top"){
                         var circuit = union(
                                 base
@@ -76,19 +73,31 @@
                             ,connector.translate([10.5,0,0])
                         )
                 } else if(block === "corner"){
-                    var circuit = union(
+
+                    if(direction === "top"){
+                        var circuit = union(
+                            base
+                            ,cube([10,3,2]).translate([0,9,0])
+                            ,cube([3,10,2]).translate([9,9,0])
+                            ,connector.translate([10.5,20,0])
+                        )
+                        circuit = difference(
+                            circuit
+                            ,connector.translate([0,10.5,0])
+                        )
+                    } else if(direction === "bottom"){
+                        var circuit = union(
                             base
                             ,cube([10,3,2]).translate([0,9,0])
                             ,cube([3,10,2]).translate([9,0,0])
                             ,connector.translate([10.5,0,0])
                         )
-                    circuit = difference(
+                        circuit = difference(
                             circuit
                             ,connector.translate([0,10.5,0])
                         )
+                    }
                 } else if(block === "tshape"){
-                    var direction = params.direction;
-
                     if(direction === "bottom"){
                         var circuit = union(
                                 base
@@ -102,17 +111,17 @@
                                 ,connector.translate([10.5,0,0])
                             )
                     } else if (direction === "top"){
-                            var circuit = union(
-                                base
-                                ,cube([20,3,2]).translate([0,9,0])
-                                ,cube([3,10,2]).translate([9,10,0])
-                                ,connector.translate([20,10.5,0])
-                            )
-                        circuit = difference(
-                                circuit
-                                ,connector.translate([0,10.5,0])
-                                ,connector.translate([10.5,20,0])
-                            )
+                        var circuit = union(
+                            base
+                            ,cube([20,3,2]).translate([0,9,0])
+                            ,cube([3,10,2]).translate([9,10,0])
+                            ,connector.translate([20,10.5,0])
+                        )
+                    circuit = difference(
+                            circuit
+                            ,connector.translate([0,10.5,0])
+                            ,connector.translate([10.5,20,0])
+                        )
                     }
                 } else {
         

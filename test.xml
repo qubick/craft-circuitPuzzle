@@ -9,10 +9,13 @@
 	 		<circuit blocktype="cross"></circuit>
 			<circuit blocktype="tshape" direction="top"></circuit>
 		</column>
-	 	<circuit blocktype="sensor" direction="right"></circuit>
+		<column>
+	 		<circuit blocktype="sensor" direction="right"></circuit>
+		 	<circuit blocktype="sensor" direction="top"></circuit>
+		 </column>
 	 	<column>
-			<circuit blocktype="sensor" direction="top"></circuit>
-			<circuit blocktype="corner"></circuit>
+			<circuit blocktype="sensor" direction="right"></circuit>
+			<circuit blocktype="corner" direction="top"></circuit>
 	 	</column>
 	 </row>
 	 
