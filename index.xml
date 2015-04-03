@@ -13,26 +13,55 @@
 				var block = params.blocktype
 
                 if(block === "sensor"){
-                    var circuit = union(
+
+                    var direction = params.direction
+                    if(direction === "top"){
+                        var circuit = union(
                             base
-                            ,cube([7,3,2]).translate([0,8,0])
-                            ,cube([7,3,2]).translate([13,8,0])
-                            ,connector.translate([20,9.5,0])
+                            ,cube([7,3,2]).translate([0,9,0])
+                            ,cube([7,3,2]).translate([13,9,0])
+                            ,connector.translate([20,10.5,0])
                         )
-                    circuit = difference(
+                        circuit = difference(
                             circuit
-                            ,connector.translate([0,9.5,0])
+                            ,connector.translate([0,10.5,0])
                         )
+                    } else if(direction === "right"){
+                        var circuit = union(
+                            base
+                            ,cube([3,7,2]).translate([9,0,0])
+                            ,cube([3,7,2]).translate([9,13,0])
+                            ,connector.translate([10.5,20,0])
+                        )
+                        circuit = difference(
+                            circuit
+                            ,connector.translate([10.5,0,0])
+                        )
+                    }
                 } else if(block === "straight"){
-                    var circuit = union(
-                            base
-                            ,cube([20,3,2]).translate([0,8,0])
-                            ,connector.translate([20,9.5,0])
-                        )
-                    circuit = difference(
-                            circuit
-                            ,connector.translate([0,9.5,0])
-                        )
+                    var direction = params.direction
+
+                    if(direction === "top"){
+                        var circuit = union(
+                                base
+                                ,cube([20,3,2]).translate([0,9,0])
+                                ,connector.translate([20,10.5,0])
+                            )
+                        circuit = difference(
+                                circuit
+                                ,connector.translate([0,10.5,0])
+                            )
+                    } else if (direction === "right"){
+                        var circuit = union(
+                                base
+                                ,cube([3,20,2]).translate([9,0,0])
+                                ,connector.translate([10.5,20,0])
+                            )
+                        circuit = difference(
+                                circuit
+                                ,connector.translate([10.5,0,0])
+                            )
+                    }
                 } else if(block === "cross"){
                     var circuit = union(
                             base
@@ -43,32 +72,48 @@
                         )
                     circuit = difference(
                             circuit
-                            ,connector.translate([0,10,0])
-                            ,connector.translate([10,0,0])
+                            ,connector.translate([0,10.5,0])
+                            ,connector.translate([10.5,0,0])
                         )
                 } else if(block === "corner"){
                     var circuit = union(
                             base
-                            ,cube([10,3,2]).translate([0,9.5,0])
-                            ,cube([3,10,2]).translate([9.5,0,0])
-                            ,connector.translate([10,0,0])
+                            ,cube([10,3,2]).translate([0,9,0])
+                            ,cube([3,10,2]).translate([9,0,0])
+                            ,connector.translate([10.5,0,0])
                         )
                     circuit = difference(
                             circuit
-                            ,connector.translate([0,9.5,0])
+                            ,connector.translate([0,10.5,0])
                         )
                 } else if(block === "tshape"){
-                    var circuit = union(
-                            base
-                            ,cube([20,3,2]).translate([0,8,0])
-                            ,cube([3,10,2]).translate([8,0,0])
-                            ,connector.translate([20,9.5,0])
-                        )
-                    circuit = difference(
-                            circuit
-                            ,connector.translate([0,9.5,0])
-                            ,connector.translate([9.5,0,0])
-                        )
+                    var direction = params.direction;
+
+                    if(direction === "bottom"){
+                        var circuit = union(
+                                base
+                                ,cube([20,3,2]).translate([0,9,0])
+                                ,cube([3,10,2]).translate([9,0,0])
+                                ,connector.translate([20,10.5,0])
+                            )
+                        circuit = difference(
+                                circuit
+                                ,connector.translate([0,10.5,0])
+                                ,connector.translate([10.5,0,0])
+                            )
+                    } else if (direction === "top"){
+                            var circuit = union(
+                                base
+                                ,cube([20,3,2]).translate([0,9,0])
+                                ,cube([3,10,2]).translate([9,10,0])
+                                ,connector.translate([20,10.5,0])
+                            )
+                        circuit = difference(
+                                circuit
+                                ,connector.translate([0,10.5,0])
+                                ,connector.translate([10.5,20,0])
+                            )
+                    }
                 } else {
         
                     holes.forEach(function(h){
